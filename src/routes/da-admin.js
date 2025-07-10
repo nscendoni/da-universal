@@ -95,6 +95,10 @@ export async function daSourceGet({ req, env, daCtx }) {
   });
   let body;
   const daAdminResp = await env.daadmin.fetch(req);
+  if (daAdminResp && ext !== 'html') {
+    return daAdminResp;
+  }
+
   if (daAdminResp && daAdminResp.status === 200) {
     // enrich stored content with HTML header and UE attributes
     const originalBodyHtml = await daAdminResp.text();
