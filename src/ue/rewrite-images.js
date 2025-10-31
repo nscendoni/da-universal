@@ -12,14 +12,14 @@
 
 import { selectAll } from 'hast-util-select';
 
-export default function rewriteDaImgSrcs(bodyTree) {
-  const daImgSrcs = selectAll('img[src^="https://content.da."]', bodyTree);
+export default function rewriteDaImgSrcs(bodyTree, daCtx) {
+  const daImgSrcs = selectAll('img[src^="' + daCtx.contentService + '"]', bodyTree);
 
   daImgSrcs.forEach((img) => {
     img.properties.src = `/${img.properties.src.split('/').slice(5).join('/')}`;
   });
 
-  const daImgSources = selectAll('source[srcset^="https://content.da."]', bodyTree);
+  const daImgSources = selectAll('source[srcset^="' + daCtx.contentService + '"]', bodyTree);
   daImgSources.forEach((img) => {
     img.properties.srcSet = `/${img.properties.srcSet.split('/').slice(5).join('/')}`;
   });

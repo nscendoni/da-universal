@@ -24,7 +24,12 @@ export function getCookie({ req }) {
     if (cookieValue) {
       const respHeaders = new Headers();
       respHeaders.append('Content-Type', 'text/plain');
-      respHeaders.append('Set-Cookie', `auth_token=${cookieValue}; Secure; Path=/; HttpOnly; SameSite=None; Partitioned; Max-Age=84600`);
+      // add Secure flag and SameSite=None; and Partitioned; do not if request is not from localhost
+      if (req.headers.get('Origin').includes('http://localhost')) {
+        respHeaders.append('Set-Cookie', `auth_token=${cookieValue}; Path=/; HttpOnly; Max-Age=84600`);
+      } else {
+        respHeaders.append('Set-Cookie', `auth_token=${cookieValue}; Path=/; HttpOnly; Secure; SameSite=None; Partitioned; Max-Age=84600`);
+      }
       respHeaders.append('Access-Control-Allow-Origin', req.headers.get('Origin'));
       Object.entries(DEFAULT_CORS_HEADERS).forEach(([key, value]) => {
         respHeaders.append(key, value);

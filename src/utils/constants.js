@@ -10,7 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-export const TRUSTED_ORIGINS = ['https://experience.adobe.com', 'https://da.live', 'http://localhost:3000', 'https://image--da-live--adobe.aem.live', 'https://localhost.corp.adobe.com:8080'];
+export const TRUSTED_ORIGINS = ['https://experience.adobe.com', 'https://da.live', 'http://localhost:3000', 'https://image--da-live--adobe.aem.live', 
+  'http://localhost.corp.adobe.com:8080', 'http://localhost:8787'];
 
 export const DEFAULT_CORS_HEADERS = {
   'Access-Control-Allow-Methods': 'GET, HEAD, POST, OPTIONS',

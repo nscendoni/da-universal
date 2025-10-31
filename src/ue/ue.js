@@ -102,10 +102,10 @@ export async function prepareHtml(daCtx, aemCtx, bodyHtmlStr, headHtmlStr) {
   headNode.children.push(...getUEHtmlHeadEntries(daCtx, aemCtx));
 
   // rewrite icons
-  rewriteIcons(bodyNode);
+  rewriteIcons(bodyNode, daCtx);
 
-  // rewrite DA img srcs
-  rewriteDaImgSrcs(bodyNode);
+  // rewrite DA img srcs (pass current path for relative path calculation)
+  rewriteDaImgSrcs(bodyNode, daCtx.path);
 
   // add data attributes for UE to the body
   const ueConfig = await getUEConfig(aemCtx);
